@@ -1,0 +1,24 @@
+Info:
+ * Code by Geir Anderson
+ * Calculates SRP percentages to determine if the system is either 1 or 2 state
+ * and places into a central file after different states are tested
+ * Fork based on exec.tgz
+ * The SRP system appears to be based on a one state history, since it appears to choose based on the 2nd input without considering the 1st input
+ * This can be seen in the gather.txt generated after running the program
+
+Problems:
+Gather uses a system command and not a proper read/write, this is due to not being able to work out how to read the files after generating them through the template.
+
+Compile:
+
+gcc src_proj.c -lsrp -o runit
+
+
+Run:
+
+./runit
+
+
+Read the Results:
+
+cat gather.txt
