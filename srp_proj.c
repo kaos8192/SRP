@@ -1,15 +1,14 @@
-#include "SRP.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-
 /*
  * Code by Geir Anderson
  * Calculates SRP percentages to determine if the system is either 1 or 2 state
  * and places into a central file after different states are tested
  * Fork based on exec.tgz
  */
+#include "SRP.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
 void simulation(char a, char b, float reps)
 {
@@ -44,15 +43,6 @@ void simulation(char a, char b, float reps)
         }
     }
     
-    /*if(a == b)
-    {
-        fprintf(theoutf, "Demonstrates 1 or 2 state, both plays are the same.\n");
-    }
-    else
-    {
-        fprintf(theoutf, "Demonstrates more clearly is 1 or 2 state, since both plays are different.\n");
-    }
-    fprintf(theoutf, "%c , %c \n", a, b);*/
     fprintf(theoutf, "%c, %c:: s: %f r: %f p: %f\n", a, b, scissor/reps, rock/reps, paper/reps);
 
     fflush(theoutf);
@@ -101,34 +91,17 @@ int main()
                 b[0] = 's';
             }
 
-            //char* sendin[] = {a, b, 0};
-            /*if(execv("./sim", sendin) < 0)
-            {
-                printf("error");
-            }*/
-
             simulation(a[0], b[0], 10000000);
 
             return 0;
-
-            //printf("%c, %c, pid is %d\n", a[0], b[0], getpid());
-            //return 0;
         }
     }
     if(pid > 0)
     {
         while(wait(NULL) >= 0){}
     }
-
-    /*
-    FILE* gp = fopen("gather.txt", "a+");
-
-    fclose(gp);
-    */
-
     //used in testing prior to gather above
     system("cat *.txt > gather.txt");
 
-    //printf("parent is %d\n", getpid());
     return 0;
 }
